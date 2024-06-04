@@ -4,7 +4,8 @@ import { UserButton } from "@clerk/nextjs";
 const Home = () => {
   return (
     <div>
-      <UserButton afterSignOutUrl="/" />
+      {/* <UserButton afterSignOutUrl="/" /> */}
+      <h1>dashboard</h1>
     </div>
   );
 };
