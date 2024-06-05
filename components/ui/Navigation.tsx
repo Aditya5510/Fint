@@ -76,12 +76,12 @@ export const Navigation = () => {
   }
 
   return (
-    <nav className="hidden lg:flex items-center gap-x-2 overflow-x-auto">
+    <div className="hidden lg:flex items-center gap-x-2 overflow-x-auto">
       {routes.map((route, index) => {
         return (
           <>
             <NavB
-              key={route.href}
+              key={index}
               href={route.href}
               label={route.label}
               isActive={pathname === route.href}
@@ -89,7 +89,7 @@ export const Navigation = () => {
           </>
         );
       })}
-    </nav>
+    </div>
   );
 };
 
