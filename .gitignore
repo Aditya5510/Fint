@@ -10,6 +10,9 @@
 # testing
 /coverage
 
+readme.txt
+
+
 # next.js
 /.next/
 /out/
