@@ -68,7 +68,12 @@ const app = new Hono()
       //const {name}=c.body;
       const [data] = await db
         .insert(accounts)
-        .values({ id: createId(), userId: auth.userId, ...values })
+        .values({
+          id: createId(),
+          userId: auth.userId,
+          pid: createId(),
+          ...values,
+        })
         .returning();
 
       return c.json({ data });
