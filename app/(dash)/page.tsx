@@ -5,6 +5,7 @@ import { useNewAccount } from "../Features/Accounts/hooks/useNewAccount";
 
 const Home = () => {
   const { onOpen } = useNewAccount();
+
   return (
     <div>
       <Button onClick={onOpen}>Open</Button>
