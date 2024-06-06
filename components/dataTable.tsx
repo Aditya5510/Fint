@@ -12,6 +12,7 @@ import {
   getFilteredRowModel,
   Row,
 } from "@tanstack/react-table";
+import { useConfirm } from "@/app/hooks/useConfirm";
 
 import {
   Table,
@@ -43,6 +44,11 @@ export function DataTable<TData, TValue>({
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
 
+  const [ConfirmDialog, confirm] = useConfirm(
+    "Are you sure you want to delete these rows?",
+    "This action cannot be undone."
+  );
+
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
   );
@@ -67,6 +73,7 @@ export function DataTable<TData, TValue>({
 
   return (
     <div>
+      <ConfirmDialog />
       <div className="flex items-center py-4">
         <Input
           placeholder={`Filter ${filterKey}`}
@@ -82,9 +89,17 @@ export function DataTable<TData, TValue>({
             variant="outline"
             size="sm"
             className="ml-auto font-normal text-xs"
+            onClick={async () => {
+              const ok = await confirm();
+
+              if (ok) {
+                onDelete(table.getFilteredSelectedRowModel().rows);
+                table.resetRowSelection();
+              }
+            }}
           >
-            <Trash2 className="size-4 mr-3" />(
-            {table.getFilteredSelectedRowModel().rows.length} selected)
+            <Trash2 className="size-4 mr-1" />
+            Delete ({table.getFilteredSelectedRowModel().rows.length} )
           </Button>
         )}
       </div>
