@@ -4,6 +4,7 @@ import { clerkMiddleware, getAuth } from "@hono/clerk-auth";
 import accounts from "./accounts";
 import { HTTPException } from "hono/http-exception";
 import categories from "./categories";
+import transaction from "./transaction";
 
 export const runtime = "edge";
 
@@ -18,7 +19,8 @@ app.onError((e, c) => {
 
 const routes = app
   .route("/accounts", accounts)
-  .route("/categories", categories);
+  .route("/categories", categories)
+  .route("/transactions", transaction);
 
 export const GET = handle(app);
 export const POST = handle(app);
